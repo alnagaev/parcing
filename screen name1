@@ -1,0 +1,14 @@
+import requests
+f = open ('C:/Users/alnag/Documents/names.txt', "r")
+lines = f.readlines()
+a = [l.strip() for l in lines]
+f.close()
+list1 = a
+for i in a:
+    try:
+        r = requests.get('https://api.vk.com/method/utils.resolveScreenName',params={'screen_name':i})
+        response = r.json()
+        oid = response['response']['object_id']
+    except TypeError:
+        print('kkkk')
+    print('https://vk.com/club'+str(oid))
