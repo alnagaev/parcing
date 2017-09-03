@@ -10,5 +10,5 @@ for i in a:
         response = r.json()
         oid = response['response']['object_id']
     except TypeError:
-        print('kkkk')
+        oid = None
     print('https://vk.com/club'+str(oid))
