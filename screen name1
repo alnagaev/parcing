@@ -1,5 +1,5 @@
 import requests
-f = open ('C:/Users/alnag/Documents/names.txt', "r")
+f = open ('C:/Users/alnag/Documents/screengroups.txt', "r")
 lines = f.readlines()
 a = [l.strip() for l in lines]
 f.close()
