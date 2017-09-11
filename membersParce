@@ -1,0 +1,89 @@
+from bs4 import BeautifulSoup as soup 
+import csv
+import re 
+
+payload = {'inUserName': 'USERNAME/EMAIL', 'inUserPass': 'PASSWORD'}
+
+f = open('C:/Users/alnag/Documents/my scripts/numbersid1.txt', "r")# загружаем документ, прописывая путь от диска до файла
+lines = f.readlines()
+a = [l.strip() for l in lines]
+f.close()
+def allPpl():
+    for i in a:
+        my_url = 'https://vk.com/search?c%5Bgroup%5D='+str(i)+'+&c%5Bsection%5D=people' 
+        uClient = uReq(my_url)
+        page_html = uClient.read()
+        uClient.close()
+        page_soup = soup(page_html, "html.parser")
+        count = page_soup.findAll("span")
+        ints = list(map(int, re.findall(r'\d+', str(count))))
+        if  len(ints)>1:
+            ints = str(ints[0])+str(ints[1])
+        else:
+            ints = str(ints[0])
+        print(ints)  
+#allPpl()
+def youngPpl():
+    for i in a:
+        my_url = 'https://vk.com/search?c%5Bage_to%5D=30&c%5Bgroup%5D='+str(i)+'&c%5Bname%5D=1&c%5Bphoto%5D=1&c%5Bsection%5D=people' 
+        uClient = uReq(my_url)
+        page_html = uClient.read()
+        uClient.close()
+        page_soup = soup(page_html, "html.parser")
+        count = page_soup.findAll("span")
+        ints = list(map(int, re.findall(r'\d+', str(count))))
+        if  len(ints)>1:
+            ints = str(ints[0])+str(ints[1])
+        else:
+            ints = str(ints[0])
+        print(ints)  
+#youngPpl()
+
+def PiterCitizens():
+    for i in a:
+        my_url = 'https://vk.com/search?c%5Bcity%5D=2&c%5Bcountry%5D=1&c%5Bgroup%5D='+str(i)+'&c%5Bname%5D=1&c%5Bphoto%5D=1&c%5Bsection%5D=people' 
+        uClient = uReq(my_url)
+        page_html = uClient.read()
+        uClient.close()
+        page_soup = soup(page_html, "html.parser")
+        count = page_soup.findAll("span")
+        ints = list(map(int, re.findall(r'\d+', str(count))))
+        if  len(ints)>1:
+            ints = str(ints[0])+str(ints[1])
+        else:
+            ints = str(ints[0])
+        print(ints)  
+#PiterCitizens()
+
+def womanMembers():
+    for i in a:
+        my_url = 'https://vk.com/search?c%5Bgroup%5D='+str(i)+'&c%5Bname%5D=1&c%5Bphoto%5D=1&c%5Bsection%5D=people&c%5Bsex%5D=1' 
+        uClient = uReq(my_url)
+        page_html = uClient.read()
+        uClient.close()
+        page_soup = soup(page_html, "html.parser")
+        count = page_soup.findAll("span")
+        ints = list(map(int, re.findall(r'\d+', str(count))))
+        if  len(ints)>1:
+            ints = str(ints[0])+str(ints[1])
+        else:
+            ints = str(ints[0])
+        print(ints)  
+#womanMembers()
+
+def maleMembers():
+    for i in a:
+        my_url = 'https://vk.com/search?c%5Bgroup%5D='+str(i)+'&c%5Bname%5D=1&c%5Bphoto%5D=1&c%5Bsection%5D=people&c%5Bsex%5D=2' 
+        uClient = uReq(my_url)
+        page_html = uClient.read()
+        uClient.close()
+        page_soup = soup(page_html, "html.parser")
+        count = page_soup.findAll("span")
+        ints = list(map(int, re.findall(r'\d+', str(count))))
+        if  len(ints)>1:
+            ints = str(ints[0])+str(ints[1])
+        else:
+            ints = str(ints[0])
+        print(ints)  
+#maleMembers()
+print(allPpl(), youngPpl(), PiterCitizens(), womanMembers(), maleMembers())  
