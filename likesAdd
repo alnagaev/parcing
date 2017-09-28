@@ -1,10 +1,12 @@
 import requests, re, os, time 
 uid = 186676002
-count = 10
 Token = 'dc266595e988265470963b6abcf385d0ebbe32fa45be4d9b0d2b0537d30bdafcac89ddec1584aab75a83d' 
-r = requests.get('https://api.vk.com/method/wall.get',params={'owner_id':uid,'count':count, 'access_token':Token})
+r = requests.get('https://api.vk.com/method/wall.get',params={'owner_id':uid,'count':0, 'access_token':Token})
 response = r.json()
-for i in range(1, count):
+post_count = r.json()['response'][0]
+r = requests.get('https://api.vk.com/method/wall.get',params={'owner_id':uid,'count':post_count, 'access_token':Token})
+response = r.json()
+for i in range(1, post_count):
     item_id = response['response'][i]['id']
     with open('likesItems.txt', 'a') as File:
         f =  File.write(str(item_id)+ ', ')
@@ -15,5 +17,6 @@ with open('likesItems.txt', 'r') as File1:
 
 for i in a:
     r = requests.get('https://api.vk.com/method/likes.delete',params={'owner_id':uid, 'type': 'post', 'item_id':i, 'access_token':Token})
+    time.sleep(0.33)
     print(r.json())
 os.remove('likesItems.txt')
