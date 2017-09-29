@@ -1,5 +1,5 @@
 import requests, re, os, time 
-uid = 186676002
+uid = 
 Token = 'dc266595e988265470963b6abcf385d0ebbe32fa45be4d9b0d2b0537d30bdafcac89ddec1584aab75a83d' 
 r = requests.get('https://api.vk.com/method/wall.get',params={'owner_id':uid,'count':0, 'access_token':Token})
 response = r.json()
