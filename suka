@@ -1,0 +1,23 @@
+import requests, time
+Token = '7bcbe786dc30553c097010cd323a82438b03a9570a1713e4386e254fac5cc292d2e110a74936f5fc2a1c8'
+q = str(input())
+count = int(input())
+def groupsSearch():
+    gid_list = []
+    r = requests.get('https://api.vk.com/method/groups.search', params={'q':q,'count': count, 'access_token':Token})
+    for i in range(1, int(count)):
+        gid = r.json()['response'][i]['gid']
+        name = r.json()['response'][i]['name']
+        gid_list.append(gid)
+        print(gid, name)
+    return gid_list
+
+for i in groupsSearch():
+    u = requests.get('https://api.vk.com/method/groups.getById', params={'group_ids': i,'fields': 'contacts', 'access_token':Token})
+    time.sleep(0.33)
+    res = u.json() 
+#     print(res)
+    name = res['response'][0]['name']
+    uid = res['response'][0]['contacts']['user_id']
+    desc = res['response'][0]['contacts']['desc']
+    print(name, uid, desc)
