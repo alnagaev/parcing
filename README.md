@@ -1,2 +1,2 @@
 # parcing
-VK api, parcing and stuff
+Just an archive of some parcing scripts
